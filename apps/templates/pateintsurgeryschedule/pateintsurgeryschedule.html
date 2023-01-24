@@ -1,0 +1,132 @@
+ {% extends 'layouts/base.html' %}
+
+{% block title %} Surgery Schedule {% endblock title %}
+
+{% block content %}
+  <!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+      <div class="col-xl-12 order-xl-1">
+      <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">New Surgery Schedule Information </h3>
+            </div>
+<!--            <div class="col-4 text-right">-->
+
+<!--                <button type="submit" class="btn btn-md btn-primary">SAVE</button>-->
+<!--            </div>-->
+          </div>
+        </div>
+           <form method="POST" class="post-form" action="./pateintsurgeryscheduleinfo">
+              {% csrf_token %}
+        <div class="card-body">
+
+            <h6 class="heading-small text-muted mb-4">Surgery information</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Scheduler Code</label>
+                    <input type="text" id="input-code" class="form-control" placeholder="Code" name="schedule_code" value="{{ schedule_code }}">
+<!--                      {{ form.schedule_code }}-->
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Scheduler Title</label>
+                    <input type="text" id="input-title" class="form-control" placeholder="Title" name="schedule_name" value="{{ schedule_name }}">
+<!--                      {{ form.schedule_name }}-->
+
+                  </div>
+                </div>
+              </div>
+<!--            row end -->
+            <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Pateint</label>
+
+<!--                      {{ form.pateint_id}}-->
+                      <select id="inputState" class="form-control" name="pateint_id">
+                         <option value="0">Select Pateint</option>
+                          {% for pateint in pateints %}
+                            <option value="{{ pateint.id }}">{{ pateint.p_fname }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Surgeon</label>
+<!--                    {{ form.surgeon_id }}-->
+                      <select id="inputSurgeon" class="form-control" name="surgeon_id">
+                         <option value="0">Select Surgeon</option>
+                          {% for surgeon in surgeons %}
+                            <option value="{{ surgeon.id }}">{{ surgeon.sg_name }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                </div>
+              </div>
+
+             <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Anesthesiologist</label>
+<!--                      {{ form.anesthesiologist_id }}-->
+                      <select id="inputAnesthesia" class="form-control" name="anesthesiologist_id">
+                         <option value="0">Select Anesthesiologist</option>
+                          {% for anesthesiologist in anesthesiologists %}
+                            <option value="{{ anesthesiologist.id }}">{{ anesthesiologist.a_name }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label">Surgery Date & Time</label>
+                    <input type="datetime-local" id="input-datetime" class="form-control" placeholder="Surgery Date & Time" name="schedule_date" value="{{ schedule_date }}">
+<!--                      {{ form.schedule_date }}-->
+                  </div>
+                </div>
+             </div>
+             <div class="row">
+                <div class="col-lg-6">
+<!--                  <div class="form-group">-->
+<!--                    <label class="form-control-label">Status</label>-->
+
+<!--                      {{ form.schedule_status }}-->
+<!--                  </div>-->
+                  <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="schedule_status" value="{{ schedule_status }}" checked>
+                      <label class="form-check-label" for="flexSwitchCheckChecked">Status</label>
+                  </div>
+                </div>
+             </div>
+
+
+            </div>
+
+        </div>
+          <div class="card-footer">
+              <div class="col-md-12 text-right">
+
+                <button type="submit" class="btn btn-md btn-primary">SAVE</button>
+                <button type="text" class="btn btn-md btn-warning"><a href="./">CLOSE</a></button>
+              </div>
+          </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
+  {% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}{% endblock javascripts %}
